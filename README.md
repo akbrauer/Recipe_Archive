@@ -1,0 +1,1 @@
+Intended to be a from-scratch React/Tailwind project in order to solidify the fundamentals of component design before regularly using external UI libraries.

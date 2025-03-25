@@ -1,0 +1,22 @@
+{
+	"name": "recipe-archive",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "Avery Brauer",
+	"main": "index.js",
+	"scripts": {
+		"start": "ts-node src/index.ts",
+		"build": "tsc",
+		"serve": "node dist/index.js"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.1",
+		"@types/node": "^22.13.11",
+		"typescript": "^5.8.2"
+	}
+}
