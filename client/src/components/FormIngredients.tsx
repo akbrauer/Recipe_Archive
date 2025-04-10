@@ -12,6 +12,9 @@ const FormIngredients: FC<{ ingredientState?: Ingredient[], errorState: ErrorSta
     const addIng = () => {
         setIngredients(ingredients + 1);
     }
+    const removeIng = () => {
+        setIngredients(ingredients - 1);
+    }
 
     return (
         <div>
@@ -31,6 +34,7 @@ const FormIngredients: FC<{ ingredientState?: Ingredient[], errorState: ErrorSta
                 }
             })}
             <Button text={ "Add Ingredient" } type="button" onClick={ addIng }/>
+            <Button text={ "Delete Ingredient" } type="button" customClass="bg-red-500" onClick={ removeIng }/>
         </div>
     )
 }
