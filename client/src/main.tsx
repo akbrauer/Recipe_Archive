@@ -4,19 +4,21 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
 import Home from "./components/Home";
-import Contact from "./components/Contact";
+import NewRecipe from "./components/NewRecipe";
 import Show from "./components/Show";
 import Layout from "./components/Layout";
 import RecipeList from "./components/RecipeList";
+import EditRecipe from './components/EditRecipe';
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/show", element: <Show /> },
-      { path: "/contact", element: <Contact /> },
-      { path: "/all", element: <RecipeList /> },
+      { path: "/recipes", element: <RecipeList /> },
+      { path: "/recipes/new", element: <NewRecipe /> },
+      { path: "/recipes/:id", element: <Show/> },
+      { path: "/recipes/:id/edit", element: <EditRecipe/> },
     ],
   },
 ]);

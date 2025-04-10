@@ -1,18 +1,18 @@
-
-import { Recipe } from "../models/recipe";
+import { Recipe } from "../lib/definitions";
 
 interface Props {
-    recipe?: Recipe;
+	recipe?: Recipe;
 }
 
-function RecipeCard ({ recipe }: Props) {
-    return (
-    <a className="border rounded-lg" href={ recipe?.id }>
-        <img src={ recipe?.img } className="rounded-t-lg" alt={recipe?.name}/>
-        <div className="">
-            <h5 className="text-center text-lg font-bold">{recipe?.name}</h5>
-        </div>
-    </a>)
+function RecipeCard({ recipe }: Props) {
+	return (
+		<a className="border rounded-lg" href={"/recipes/" + recipe?.recipeid}>
+			<img src={recipe?.image} className="rounded-t-lg" alt={recipe?.name} />
+			<div className="">
+				<h5 className="text-center text-lg font-bold">{recipe?.name}</h5>
+			</div>
+		</a>
+	);
 }
 
 export default RecipeCard;

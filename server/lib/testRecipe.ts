@@ -1,9 +1,9 @@
-import { Recipe } from '../models/recipe';
+import { Recipe } from "./definitions";
 
-const recipe: Recipe = {
-	id: "678faa83eb0ee52686998935" ,
+const recipe = {
+	id: "678faa83eb0ee52686998935",
 	name: "Saucy Moroccan-Spiced Lentils",
-	img: "https://minimalistbaker.com/wp-content/uploads/2017/11/Moroccan-Lentils-SQUARE.jpg",
+	image: "https://minimalistbaker.com/wp-content/uploads/2017/11/Moroccan-Lentils-SQUARE.jpg",
 	ingredients: [
 		{
 			amount: "2",

@@ -1,14 +1,15 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import dotenv from "dotenv";
 import apiRouter from "./routes/api";
-
 dotenv.config();
 
-const host = process.env.SERVER_HOST || "http://localhost";
+const host = process.env.SERVER_HOST || "localhost";
 const port = Number(process.env.PORT) || 3000;
 
 const app: Express = express();
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //Allow CORS Middleware (Replace with vite proxy config)
 // app.use((req, res, next) => {

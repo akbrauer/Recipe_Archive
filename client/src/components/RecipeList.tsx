@@ -3,7 +3,7 @@ import useFetch from "../hooks/useFetch";
 
 
 function RecipeList () {
-    const data = useFetch('/api/all');
+    const data = useFetch('/api/recipes');
     const recipes = data.recipes;
 
     return (
