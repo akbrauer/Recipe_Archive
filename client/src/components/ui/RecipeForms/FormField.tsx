@@ -1,5 +1,5 @@
-import { useState, FC, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
-
+import { useState, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { ButtonAsLink } from "../Button";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string;
@@ -16,7 +16,7 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
     label: string;
 }
 
-const FormField: FC<InputProps> = ({id, label, width, ...other}) => {
+const FormField = ({id, label, width, ...other}: InputProps) => {
     return (
         <div className="my-3">
             <label className="inline-block" htmlFor={ id }>{ label }</label>
@@ -26,7 +26,7 @@ const FormField: FC<InputProps> = ({id, label, width, ...other}) => {
 
 export default FormField;
 
-export const FormFileInput: FC<InputProps> = ({id, label, width, ...other }) => {
+export const FormFileInput = ({id, label, width, ...other }: InputProps) => {
     other.type = "file";
     const baseStyles = "border rounded block file:mr-5 file:py-1 file:px-3 file:border-r-[1px] file:bg-gray-100 hover:file:cursor-pointer hover:file:bg-blue-50 hover:file:text-blue-700";
     return (
@@ -39,9 +39,8 @@ export const FormFileInput: FC<InputProps> = ({id, label, width, ...other }) => 
     )
 }
 
-export const CustomFileInput: FC<FileInputProps> = ({id, label, width, defaultIsFile, ...other }) => {
+export const CustomFileInput = ({id, label, width, defaultIsFile, ...other }: FileInputProps) => {
     const [isFile, setIsFile] = useState(defaultIsFile);
-
     return (
         <div className="my-3">
             <label className="inline-block" htmlFor={isFile ? `${id}-file` : `${id}-url`}>{ label }</label>
@@ -56,13 +55,11 @@ export const CustomFileInput: FC<FileInputProps> = ({id, label, width, defaultIs
             :
             <input className={width ? ("border rounded mt-1 p-1 block " + width) : "border rounded mt-1 p-1 block w-full"} id={ `${id}-url` } {...other}/>
             }
-            <button className="underline text-blue-600 text-md font-medium" type="button" onClick={() => setIsFile(!isFile)}>
-                {isFile ? "Or upload an image via URL" : "Or upload an image file"}
-            </button>
+            <ButtonAsLink customClass="mt-1" text={isFile ? "Or upload an image via URL" : "Or upload an image file"} onClick={() => setIsFile(!isFile)}/>
         </div>
     );
 };
-export const FormTextarea: FC<TextareaProps> = ({id, label, ...other}) => {
+export const FormTextarea = ({id, label, ...other}: TextareaProps) => {
     return (
         <div className="my-3">
             <label className="inline-block" htmlFor={ id }>{ label }</label>

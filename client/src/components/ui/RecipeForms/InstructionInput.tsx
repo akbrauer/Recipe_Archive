@@ -1,9 +1,14 @@
-import { FC, Fragment, useState } from "react";
-import { FormTextarea } from "./ui/FormField";
-import Button from "./ui/Button";
-import { ErrorState } from "../lib/schema";
+import { Fragment, useState } from "react";
+import { FormTextarea } from "./FormField";
+import Button from "../Button";
+import { ErrorDescription } from "../../../lib/definitions";
 
-const FormInstructions: FC<{instructionState?: string[], errorState: ErrorState}> = ({ instructionState, errorState }) => {
+interface Props {
+    instructionState?: string[];
+    instErrors?: ErrorDescription[];
+}
+
+const FormInstructions = ({ instructionState, instErrors }: Props) => {
     const initialInstructions = instructionState ? instructionState.length : 1;
     const [instructions, setInstructions] = useState(initialInstructions);
     
@@ -19,8 +24,8 @@ const FormInstructions: FC<{instructionState?: string[], errorState: ErrorState}
                 return (
                     <Fragment key={ ins }>
                         <FormTextarea id={"step-" + ins} label={"Step " + ins + " :"}  name={"recipe[instructions]"} key={ "step-" + ins } defaultValue={instructionState && instructionState[index]}/>
-                        {errorState.errors?.instructions?.map((error) => {
-                            if(error?.path === index){
+                        {instErrors?.map((error) => {
+                            if(error?.path[0] === index){
                                 return (
                                     <div key={ "error-" + ins }>{ error.message }</div>
                                 )

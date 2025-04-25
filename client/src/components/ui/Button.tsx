@@ -1,4 +1,4 @@
-import { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     text: string;
@@ -10,7 +10,7 @@ export interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement>
     customClass?: string;
 }
 
-const Button: FC<ButtonProps> = ({text, customClass,  ...props }) => {
+const Button = ({text, customClass,  ...props }: ButtonProps) => {
     return (
         <button className={customClass ? `border rounded py-1 px-2 mb-2 bg-purple-500 ${customClass}` : "border rounded py-1 px-2 mb-2 bg-purple-500" } {...props}> { text }</button>
     )
@@ -18,16 +18,22 @@ const Button: FC<ButtonProps> = ({text, customClass,  ...props }) => {
 
 export default Button;
 
-export const SubmitButton: FC<ButtonProps> = ({text, customClass, ...props }) => {
+export const SubmitButton = ({text, customClass, ...props }: ButtonProps) => {
     props.type = "submit";
     return (
         <button className={customClass ? `border rounded py-1 px-2 bg-green-500 ${customClass}` : "border rounded py-1 px-2 bg-green-500" } {...props}> { text }</button>
     )
 }
 
-export const LinkButton: FC<LinkButtonProps> = ({text, customClass, ...props}) => {
+export const LinkButton = ({text, customClass, ...props}: LinkButtonProps) => {
     return (
         <a className={customClass ? `border rounded py-1 px-2 mb-2 bg-purple-500 ${customClass}` : "border rounded py-1 px-2 mb-2 bg-purple-500" } {...props}>{ text }</a>
         
+    )
+}
+
+export const ButtonAsLink = ({text, customClass, ...props}: ButtonProps) => {
+    return (
+        <button className={customClass ? `mb-2 underline text-blue-600 font-medium ${customClass}` : "mb-2 underline text-blue-600 font-medium" } type="button" {...props}>{text}</button>
     )
 }

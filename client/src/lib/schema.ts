@@ -1,126 +1,117 @@
 import { z } from 'zod';
+import { ParseObject, ErrorDescription } from './definitions';
 
 export const FormSchema = z.object({
     name: z.string().trim().min(1, { message: "Recipe must have a name." }),
-    servings: z.coerce.number().gt(0, { message: "Must be more than zero." }),
-    url: z.string().trim().min(1, { message: "Must provide a link to the original recipe" }),
     thumbnailFile: z.instanceof(File).refine((file) =>
         [
             'image/png',
             'image/jpeg',
             'image/jpg',
+            'image/webp',
         ].includes(file.type),
         { message: "Recipe must have a picture"}),
     thumbnailUrl: z.string().trim().min(1, { message: "Must provide an image link."}),
+    sections: z.array(
+        z.string().trim().min(1, { message: 'Section must have a name.' }),
+    ),
+    ingredients: z.array(
+        z.array(
+            z.object({
+                amount: z.string().trim(),
+                unit: z.string().trim(),
+                name: z.string().trim().min(1, { message: "Ingredient must have a name." }),
+                notes: z.string().trim(),
+            }),
+        ),
+    ),
     instructions: z.array(
         z.string().trim().min(1, { message: 'Step cannot be blank.' })
     ),
-    ingredients: z.array(
-        z.object({
-            amount: z.string(),
-            unit: z.string(),
-            name: z.string().min(1, { message: "Ingredient must have a name." }),
-            notes: z.string(),
-        }),
-    ),
+    servings: z.coerce.number().gt(0, { message: "Must be more than zero." }),
+    url: z.string().trim().min(1, { message: "Must provide a link to the original recipe" }),
 }).partial({
     thumbnailFile: true,
     thumbnailUrl: true,
+    sections: true,
 });
 
-export type Pairs = {
-    message: string;
-    path?: number;
-}
-
-interface ParseObject {
-    name: FormDataEntryValue | null;
-    ingredients: {
-        amount: FormDataEntryValue | null;
-        unit: FormDataEntryValue | null;
-        name: FormDataEntryValue | null;
-        notes: FormDataEntryValue | null;
-    }[];
-    instructions: FormDataEntryValue[] | null;
-    servings: FormDataEntryValue | null;
-    url: FormDataEntryValue | null;
-    thumbnailFile?: FormDataEntryValue | null;
-    thumbnailUrl?: FormDataEntryValue | null;
-}
-
-export type ErrorState = {
-    errors?: {
-        name?: Array<Pairs | undefined> | undefined;
-        ingredients?: Array<Pairs | undefined> | undefined;
-        instructions?: Array<Pairs | undefined> | undefined;
-        servings?: Array<Pairs | undefined> | undefined;
-        url?: Array<Pairs | undefined> | undefined;
-        thumbnailFile?: Array<Pairs | undefined> | undefined;
-        thumbnailUrl?: Array<Pairs | undefined> | undefined;
-    };
-    message?: string | null;
-};
-
-const countIngredients = (formData: FormData) => {
+export const buildIngredientsArray = (formData: FormData) => {
+    let numSections = formData.getAll('recipe[sections]').length;
+    console.log("#Sections: ", numSections);
     const numInstructions = formData.getAll('recipe[instructions]').length;
-    const baseFields = 5;
+    console.log("#Instructions: ", numInstructions);
+    let baseFields = 4;
+    if(formData.get('numIng')){
+        baseFields = baseFields + 1;
+    };
+    if(formData.get('numSec')){
+        baseFields = baseFields + 1;
+    };
     let numFields = 0;
     for(const key of formData.keys()){
         console.log(key);
         numFields++;
     };
-    const numIngredients = (numFields - baseFields - numInstructions) / 5;
-    return numIngredients;
-}
-
-const buildIngredientsArray = (formData: FormData) => {
-        const numIngredients = countIngredients(formData);    
-        const ingredientsArray = [];
-            for(let x = 0; x < numIngredients; x++){
-                const ingredient = {amount: formData.get(`ingredients[${x}][amount]`), unit: formData.get(`ingredients[${x}][unit]`), name: formData.get(`ingredients[${x}][name]`), notes: formData.get(`ingredients[${x}][notes]`)};
-                ingredientsArray.push(ingredient);
-            }
-            return ingredientsArray;
+    // const numIngredients = (numFields - numSections  - numInstructions - baseFields) / 4;
+    const numIngredients = (numFields - numSections  - numInstructions - baseFields) / 6;
+        const ingredientSectionsArray = [];
+        if(numSections === 0){
+            numSections = 1;
+        }
+        for(let x = 0; x < numSections; x++){
+            const ingredients = [];
+            for(let y = 0; y < numIngredients; y++){
+                const baseString = `recipe[ingredients][${x}][${y}]`;
+                if(formData.get(`${baseString}[amount]`) !== null){
+                    const ingredient = {amount: formData.get(`${baseString}[amount]`), unit: formData.get(`${baseString}[unit]`), name: formData.get(`${baseString}[name]`), notes: formData.get(`${baseString}[notes]`)};
+                    ingredients.push(ingredient);
+                } else break;
+            };
+            ingredientSectionsArray.push(ingredients);
+        }
+        return ingredientSectionsArray;
 }
 
 export const validateForm = (formData: FormData) => {
     const parseObject: ParseObject = {
         name: formData.get('recipe[name]'),
+        sections: formData.getAll('recipe[sections]'),
         ingredients: buildIngredientsArray(formData),
         instructions: formData.getAll('recipe[instructions]'),
         servings: formData.get('recipe[servings]'),
         url: formData.get('recipe[url]'),
     }
-
-    console.log(typeof(formData.get('thumbnail')))
     if(typeof(formData.get('thumbnail')) !== 'string'){
         parseObject.thumbnailFile = formData.get('thumbnail');
     } else if(typeof(formData.get('thumbnail')) === 'string'){
         parseObject.thumbnailUrl = formData.get('thumbnail');
     }
 
-    console.log(parseObject);
-
     const validatedFields = FormSchema.safeParse(parseObject);
 
-    // If form validation fails, return errors early. Otherwise, continue.
+    // // If form validation fails, return errors early. Otherwise, continue.
     if(!validatedFields.success) {            
         const issues = validatedFields.error.issues;
-    const customErrors: Record<string, Array<Pairs>> = {};
-    for(const issue of issues){
-        const key = issue?.path[0];
-        if(customErrors[key]){
-            customErrors[key].push({message: issue.message, path: Number(issue.path[1])});
-        } else {
-            if(issue.path[1] !== undefined){
-                customErrors[key] = [{message: issue.message, path: Number(issue.path[1])}];
+        const customErrors: Record<string, Array<ErrorDescription>> = {};
+        for(const issue of issues){
+            let key = issue?.path[0];
+            let cut = 1;
+            if(typeof(issue.path[1]) === 'string'){
+                key = issue.path[1];
+                cut = 2;
+            }
+            const path = issue.path.filter((item, index) => {
+                return index >= cut;
+            });
+            if(customErrors[key]){
+                customErrors[key].push({ message: issue.message, path });
             } else {
-                customErrors[key] = [{message: issue.message}];
+                customErrors[key] = [{ message: issue.message, path }];
             }
         }
-    }
-    return {errors: customErrors, message: 'Missing Fields, Failed to Update Recipe.'}
+        return {errors: customErrors, message: 'Missing Fields, Failed to Update Recipe.'};
     } else {
         return null;
-    }
-}
+    };
+};

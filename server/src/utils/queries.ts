@@ -48,8 +48,11 @@ export const initTables = `CREATE TABLE IF NOT EXISTS Recipe(
     Unit varchar(255) DEFAULT NULL,
     Name varchar(255) NOT NULL,
     Notes varchar(255) DEFAULT NULL,
+    Converted_Amount varchar(255) DEFAULT NULL,
+    Converted_Unit varchar(255) DEFAULT NULL,
     RecipeId uuid NOT NULL,
     Index int NOT NULL,
+    Section int NOT NULL,
     CONSTRAINT FK_RecipeId FOREIGN KEY (RecipeId) REFERENCES Recipe(RecipeId)
     );`;
 

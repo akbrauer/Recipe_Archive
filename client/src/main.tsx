@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import NewRecipe from "./components/NewRecipe";
 import Show from "./components/Show";
 import Layout from "./components/Layout";
-import RecipeList from "./components/RecipeList";
+import RecipeList from './components/ui/AllRecipes/RecipeList';
 import EditRecipe from './components/EditRecipe';
 
 const router = createBrowserRouter([
