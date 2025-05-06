@@ -33,10 +33,10 @@ function RecipeFull () {
                 </div>
             </div>
             <div className="card-footer p-2 flex justify-between">
-                <a href={recipe?.url} className="underline text-blue-600 visited:text-purple-600 text-lg font-medium pl-2">Full Recipe</a>
-                <div className="flex">
-                    <LinkButton text="Edit Recipe" href={`/recipes/${recipe?.recipeid}/edit`} customClass="mr-2"/>
-                    <Button text="Delete Recipe" customClass="bg-red-500" onClick={() => setModalOpen(true)} />
+                <a href={recipe?.url} className="underline text-blue-600 visited:text-purple-600 text-lg font-medium pl-2 my-auto">Full Recipe</a>
+                <div className="flex border">
+                    <LinkButton text="Edit Recipe" href={`/recipes/${recipe?.recipeid}/edit`} customClass="mr-2 mb-0"/>
+                    <Button text="Delete Recipe" customClass="bg-red-500 mb-0" onClick={() => setModalOpen(true)} />
                 </div>
             </div>
             <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} hasCloseBtn={true}>

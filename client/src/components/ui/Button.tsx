@@ -34,6 +34,6 @@ export const LinkButton = ({text, customClass, ...props}: LinkButtonProps) => {
 
 export const ButtonAsLink = ({text, customClass, ...props}: ButtonProps) => {
     return (
-        <button className={customClass ? `mb-2 underline text-blue-600 font-medium ${customClass}` : "mb-2 underline text-blue-600 font-medium" } type="button" {...props}>{text}</button>
+        <button className={customClass ? `mb-2 underline text-blue-600 visited:text-purple-600 font-medium ${customClass}` : "mb-2 underline text-blue-600 visited:text-purple-600 font-medium" } type="button" {...props}>{text}</button>
     )
 }

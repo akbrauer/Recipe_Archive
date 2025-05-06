@@ -27,9 +27,9 @@
 const decimalToFraction = (dec) => {
     if(!Number.isInteger(Number(dec))){
         if(dec === '0.25') return "1/4";
-        if(dec === '0.0.33333333333333') return "1/3";
+        if(dec === '0.33333333333333') return "1/3";
         if(dec === '0.5') return "1/2";
-        if(dec === '0.66666666666666') return "2/3";
+        if(dec === '0.66666666666667') return "2/3";
         if(dec === '0.75') return "3/4";
     } else return dec;
 }

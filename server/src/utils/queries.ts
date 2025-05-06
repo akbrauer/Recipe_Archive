@@ -39,7 +39,7 @@ export const initTables = `CREATE TABLE IF NOT EXISTS Recipe(
     Image varchar(255) DEFAULT NULL,
     Servings int DEFAULT NULL,
     Url varchar(255) NOT NULL,
-    Instructions varchar(500)[]
+    Instructions varchar(1000)[]
     );
     
     CREATE TABLE Ingredient(

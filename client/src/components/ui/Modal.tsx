@@ -27,6 +27,10 @@ const Modal= ({ isOpen, hasCloseBtn, onClose, children }: Props) => {
         }
     }
 
+    // document.querySelector('dialog')?.addEventListener('focusout', () => {
+    //     handleCloseModal();
+    // })
+
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
         if(event.key === "Escape") {
             handleCloseModal();

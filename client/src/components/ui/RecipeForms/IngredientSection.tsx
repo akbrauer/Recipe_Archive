@@ -20,9 +20,12 @@ const IngredientSection = ({ ingredientState, ingErrors }: Props) => {
 	const initialSections = ingredientState?.sections?.length || 0;
 
 	let hasConversions = false;
-	if(ingredientState?.ingredients && ingredientState.ingredients[0].converted_amount){
-		hasConversions = true;
+	if(ingredientState?.ingredients){
+		for(const ing of ingredientState.ingredients){
+			if(ing.converted_amount) hasConversions = true;
+		}
 	}
+
 	const [ingSection, setIngSection] = useState(initialSections);
 	const [useConversion, setUseConversion] = useState(hasConversions);
 
@@ -50,7 +53,7 @@ const IngredientSection = ({ ingredientState, ingErrors }: Props) => {
 					<span> (E.g. Sauce, Side, Main etc.)</span>
 				</div>
 			)}
-			<ButtonAsLink text="Add Unit Conversions" onClick={() => setUseConversion(!useConversion)}/>
+			<ButtonAsLink text={useConversion ? "Remove Unit Conversions" : "Add Unit Conversions"} onClick={() => setUseConversion(!useConversion)}/>
 			{ingSection ? (
 				[...Array(ingSection)].map((section, i) => {
 					section = i + 1;
