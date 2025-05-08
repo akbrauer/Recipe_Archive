@@ -17,10 +17,27 @@ const pgConfig = {
 
 const pool = new Pool(pgConfig);
 
-export const getAllRecipes = async (req: Request, res: Response) => {
+export const getRecipeCount = async (req: Request, res: Response) => {
     try {
-        const recipes: QueryResult<Recipe[]> = await pool.query(`SELECT * FROM Recipe`);
-        res.send({ message: "All Recipe Data from Express", recipes: recipes.rows });
+        
+    } catch (error) {
+        console.log(error);
+    };
+}
+
+const items_per_page = 9;
+export const getAllRecipes = async (req: Request, res: Response) => {
+    const query = req.query;
+    console.log(query);
+    const currentPage = Number(query.page) || 1;
+    const offset = (currentPage - 1) * items_per_page;
+    try {
+        const recipeCount = await pool.query(`SELECT COUNT(*) FROM Recipe`);
+        const recipes: QueryResult<Recipe[]> = await pool.query(`
+            SELECT Recipe.recipeid, Recipe.name, Recipe.image FROM Recipe
+            LIMIT ${items_per_page} OFFSET ${offset}
+            `);
+        res.send({ message: "All Recipe Data from Express", recipes: recipes.rows, recipeCount: recipeCount.rows[0].count });
     } catch (error) {
         console.log(error);
     };

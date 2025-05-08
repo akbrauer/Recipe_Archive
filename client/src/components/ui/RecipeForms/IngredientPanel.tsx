@@ -23,8 +23,7 @@ const IngredientPanel = ({ useConversion, sectionNumber, ingredientState, itemEr
 
 	return (
 		<div>
-			{[...Array(ingredients)].map((ing, i) => {
-				ing = i + 1;
+			{[...Array(ingredients)].map((_, i) => {
 				if (itemErrors) {
 					let errorMsg = "";
 					let sectionNum = 1;
@@ -37,14 +36,14 @@ const IngredientPanel = ({ useConversion, sectionNumber, ingredientState, itemEr
 						}
 					}
 					return (
-						<IngredientInput useConversion={useConversion} sectionNumber={sectionNumber} ingNum={ing} ingredient={ingredientState && ingredientState[i]} isError={errorMsg} key={ing} />
+						<IngredientInput useConversion={useConversion} sectionNumber={sectionNumber} ingNum={ i + 1 } ingredient={ingredientState && ingredientState[i]} isError={errorMsg} key={i} />
 					);
 				} else {
-					return <IngredientInput useConversion={useConversion} sectionNumber={sectionNumber} ingNum={ing} ingredient={ingredientState && ingredientState[i]} key={ing} />;
+					return <IngredientInput useConversion={useConversion} sectionNumber={sectionNumber} ingNum={ i + 1 } ingredient={ingredientState && ingredientState[i]} key={i} />;
 				}
 			})}
 			<Button text={"Add Ingredient"} type="button" onClick={addIng} />
-			{ingredients > 1 && <Button text={"Delete Ingredient"} type="button" customClass="bg-red-500" onClick={removeIng} />}
+			{ingredients > 1 && <Button text={"Delete Ingredient"} type="button" customClass="bg-red-500 float-right" onClick={removeIng} />}
 		</div>
 	);
 };

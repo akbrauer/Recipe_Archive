@@ -1,9 +1,9 @@
-import useFetch from "../hooks/useFetch";
+import useFetch from "../../../hooks/useFetch";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import Button, { LinkButton, SubmitButton } from "./ui/Button";
-import IngredientList from "./ui/RecipePage/IngredientList";
-import Modal from "./ui/Modal";
+import Button, { LinkButton, SubmitButton } from "../Button"
+import IngredientList from "./IngredientList";
+import Modal from "../Modal";
 
 function RecipeFull () {
     const { id } = useParams();
@@ -34,11 +34,12 @@ function RecipeFull () {
             </div>
             <div className="card-footer p-2 flex justify-between">
                 <a href={recipe?.url} className="underline text-blue-600 visited:text-purple-600 text-lg font-medium pl-2 my-auto">Full Recipe</a>
-                <div className="flex border">
-                    <LinkButton text="Edit Recipe" href={`/recipes/${recipe?.recipeid}/edit`} customClass="mr-2 mb-0"/>
-                    <Button text="Delete Recipe" customClass="bg-red-500 mb-0" onClick={() => setModalOpen(true)} />
+                <div className="flex">
+                    <LinkButton text="Edit Recipe" href={`/recipes/${recipe?.recipeid}/edit`} customClass="mr-2 bg-yellow-500"/>
+                    <Button text="Delete Recipe" customClass="bg-red-500" onClick={() => setModalOpen(true)} />
                 </div>
             </div>
+
             <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} hasCloseBtn={true}>
                 <h1 className="text-xl mb-3">Are you sure you want to delete this recipe?</h1>
                 <form action={`/api/recipes/${recipe?.recipeid}/delete`} method="POST">

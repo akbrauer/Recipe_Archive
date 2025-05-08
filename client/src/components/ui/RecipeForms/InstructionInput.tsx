@@ -17,7 +17,7 @@ const FormInstructions = ({ instructionState, instErrors }: Props) => {
     }
     
     return(
-        <div id="instructions">
+        <div id="instructions" className="mt-4">
             <h3 className="text-xl mb-2">Recipe Instructions</h3>
             {[...Array(instructions)].map((ins, index) => {
                 ins = index + 1;
@@ -34,7 +34,7 @@ const FormInstructions = ({ instructionState, instErrors }: Props) => {
                     </Fragment>
                 )
             })}
-            <Button text={"Add Step"} type="button" onClick={addInst}/>
+            <Button text={"Add Step"} type="button" customClass="mb-4 bg-purple-500" onClick={addInst}/>
         </div>
     )
 }

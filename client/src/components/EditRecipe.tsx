@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import RecipeForm from "./ui/RecipeForms/RecipeForm";
-import TempForm from "./TempForm";
+import TempForm from "./Skeletons/TempForm";
 
 function EditRecipe() {
 	const { id } = useParams();
@@ -39,9 +39,9 @@ function EditRecipe() {
 	}
 
 	return (
-		<div className="mx-20">
+		<div className="lg:mx-20 md:mx-3 mx-1">
 			<h1 className="text-center text-4xl">Edit Recipe</h1>
-			<RecipeForm submitHandler={ editRecipe } endpoint={ `${id}/edit` } purpose="Update" errorState={ errorState } defaultIsFile={ false } recipe={ recipe } />
+			<RecipeForm submitHandler={editRecipe} endpoint={`${id}/edit`} purpose="Update" errorState={errorState} defaultIsFile={false} recipe={recipe} />
 		</div>
 	);
 }

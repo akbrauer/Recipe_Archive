@@ -1,4 +1,4 @@
-import RecipeFull from "./RecipeFull";
+import RecipeFull from "./ui/RecipePage/RecipeFull";
 
 function Show(){
     return (

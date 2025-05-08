@@ -63,7 +63,7 @@ const RecipeForm = ({ submitHandler, endpoint, purpose, errorState, defaultIsFil
 				defaultValue={recipe?.ingredients?.length}
 			></input>))
 			}
-			<SubmitButton text={`${purpose} Recipe`} />
+			<SubmitButton customClass="mt-2 bg-green-500" text={`${purpose} Recipe`} />
 		</form>
 	);
 };

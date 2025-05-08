@@ -14,7 +14,7 @@ const IngredientInput = ({ useConversion = false, sectionNumber, isError, ingNum
 	if (!sectionNum) {
 		sectionNum = 1;
 	}
-	const submitRoot = `recipe[ingredients][${sectionNum - 1}][${ingNum - 1}]`;
+	const submitPath = `recipe[ingredients][${sectionNum - 1}][${ingNum - 1}]`;
 	// console.log("This ingredient section is number:", sectionNumber);
 
 	return (
@@ -25,14 +25,14 @@ const IngredientInput = ({ useConversion = false, sectionNumber, isError, ingNum
 					id: `ing-${sectionNum}-${ingNum}-amount`,
 					label: "Amount",
 					type: "text",
-					name: `${submitRoot}[amount]`,
+					name: `${submitPath}[amount]`,
 					defaultValue: `${ingredient?.amount ? ingredient.amount : ""}`,
 				}}
 				input2={{
 					id: `ing-${sectionNum}-${ingNum}-unit`,
 					label: "Unit",
 					type: "text",
-					name: `${submitRoot}[unit]`,
+					name: `${submitPath}[unit]`,
 					defaultValue: `${ingredient?.unit ? ingredient.unit : ""}`,
 				}}
 			/>
@@ -41,14 +41,14 @@ const IngredientInput = ({ useConversion = false, sectionNumber, isError, ingNum
 					id: `ing-${sectionNum}-${ingNum}-conv-amount`,
 					label: "Converted Amount",
 					type: "text",
-					name: `${submitRoot}[converted_amount]`,
+					name: `${submitPath}[converted_amount]`,
 					defaultValue: `${ingredient?.converted_amount ? ingredient.converted_amount : ""}`,
 				}}
 				input2={{
 					id: `ing-${sectionNum}-${ingNum}-conv-unit`,
 					label: "Unit",
 					type: "text",
-					name: `${submitRoot}[converted_unit]`,
+					name: `${submitPath}[converted_unit]`,
 					defaultValue: `${ingredient?.converted_unit ? ingredient.converted_unit : ""}`,
 				}}
 			/>}
@@ -56,11 +56,11 @@ const IngredientInput = ({ useConversion = false, sectionNumber, isError, ingNum
 				id={"ing-" + sectionNum + "-" + ingNum + "-name"}
 				label="Ingredient"
 				type="text"
-				name={submitRoot + "[name]"}
+				name={submitPath + "[name]"}
 				defaultValue={ingredient?.name}
 			/>
 			{isError && <div>{isError}</div>}
-			<TextareaGroup id={"ing-" + sectionNum + "-" + ingNum + "-notes"} label="Notes" name={submitRoot + "[notes]"} rows={2} defaultValue={ingredient?.notes} />
+			<TextareaGroup id={"ing-" + sectionNum + "-" + ingNum + "-notes"} label="Notes" name={submitPath + "[notes]"} rows={2} defaultValue={ingredient?.notes} />
 		</div>
 	);
 };

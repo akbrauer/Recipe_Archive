@@ -4,12 +4,14 @@ import { Recipe } from "../lib/definitions";
 export interface startState {
 	message: string;
 	recipes?: Recipe[];
+	recipeCount?: number;
 }
 
 export default function useFetch(path: string) {
 	const initialState: startState = {
 		message: "Loading",
 		recipes: undefined,
+		recipeCount: undefined
 	};
 
 	const [data, setData] = useState(initialState);

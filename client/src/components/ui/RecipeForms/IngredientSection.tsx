@@ -45,18 +45,23 @@ const IngredientSection = ({ ingredientState, ingErrors }: Props) => {
 
 	return (
 		<div>
-			<h3 className="text-xl mb-1">Recipe Ingredients</h3>
+			<h3 className="text-xl mb-1 mt-4">Recipe Ingredients</h3>
 			<h4 className="text-lg italic">Options:</h4>
-			{!ingSection && (
-				<div>
-					<ButtonAsLink text="Break Ingredients Up Into Sections" onClick={initSections}/>
-					<span> (E.g. Sauce, Side, Main etc.)</span>
-				</div>
-			)}
-			<ButtonAsLink text={useConversion ? "Remove Unit Conversions" : "Add Unit Conversions"} onClick={() => setUseConversion(!useConversion)}/>
+				<ul className="ml-5 list-disc" id="options">
+				{!ingSection && (
+					<li>
+						<ButtonAsLink text="Break Ingredients Up Into Sections" onClick={initSections}/>
+						<span> (E.g. Sauce, Side, Main etc.)</span>
+					</li>
+				)}
+				<li className="mt-1 mb-3">
+					<ButtonAsLink text={useConversion ? "Remove Unit Conversions" : "Add Unit Conversions"} onClick={() => setUseConversion(!useConversion)}/>
+				</li>
+			</ul>
+			
 			{ingSection ? (
-				[...Array(ingSection)].map((section, i) => {
-					section = i + 1;
+				[...Array(ingSection)].map((_, i) => {
+					const section = i + 1;
 					let errorMsg;
 					if (ingErrors?.sections) {
 						for (const error of ingErrors.sections) {
@@ -66,32 +71,37 @@ const IngredientSection = ({ ingredientState, ingErrors }: Props) => {
 						}
 					}
 					return (
-						<div className="p-1 my-5 border" key={section}>
-							<FormField id={`section-${section}`} label={`Section ${section} Name`} name="recipe[sections]" defaultValue={ingredientState?.sections?.[i]}/>
-							{errorMsg && <div>{errorMsg}</div>}
-							<div className="p-1 my-2 border">
-								<IngredientPanel
-								useConversion={useConversion}
-								sectionNumber={section}
-								ingredientState={ingredientState?.sections && 
-									ingredientState.ingredients?.filter(ingt => {
-										if(ingt.section === section){
-											return ingt;
-										}
-								})}
-								itemErrors={ingErrors?.ingredients} key={section} />
-							</div>
+						<div className="mt-3" key={section}>
+							<section className="px-2 my-3 border rounded-lg">
+								<FormField id={`section-${section}`} label={`Section ${section} Name`} name="recipe[sections]" defaultValue={ingredientState?.sections?.[i]}/>
+								{errorMsg && <div>{errorMsg}</div>}
+								<div className="my-2">
+									<IngredientPanel
+									useConversion={useConversion}
+									sectionNumber={section}
+									ingredientState={ingredientState?.sections && 
+										ingredientState.ingredients?.filter(ingt => {
+											if(ingt.section === section){
+												return ingt;
+											}
+									})}
+									itemErrors={ingErrors?.ingredients} key={section} />
+								</div>
+								
+							</section>
 							{ingSection === section && (
-								<div>
+								<div id="section-btns">
 									<Button text={"Add Section"} type="button" onClick={addSection} />
-									<Button text={"Delete Section"} type="button" customClass="bg-red-500" onClick={removeSection} />
+									<Button text={"Delete Section"} type="button" customClass="bg-red-500 float-right" onClick={removeSection} />
 								</div>
 							)}
 						</div>
 					);
 				})
 			) : (
-				<IngredientPanel useConversion={useConversion} ingredientState={ingredientState?.ingredients} itemErrors={ingErrors?.ingredients} />
+				<div className="p-1 my-2">
+					<IngredientPanel useConversion={useConversion} ingredientState={ingredientState?.ingredients} itemErrors={ingErrors?.ingredients} />
+				</div>
 			)}
 		</div>
 	);

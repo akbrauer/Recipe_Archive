@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { Ingredient, Recipe, RecipeData } from "../../lib/definitions";
 import { QueryResult } from "pg";
 import { upload, uploadToCloudinary } from "../../lib/cloudinary";
-import { getAllRecipes, getRecipe, addRecipe, editRecipe, deleteRecipe } from "../../lib/actions";
+import { getAllRecipes, getRecipe, addRecipe, editRecipe, deleteRecipe, getRecipeCount } from "../../lib/actions";
 
 dotenv.config();
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
