@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import NavbarCopy from "./NavbarCopy";
 import Navbar from "./Navbar";
 
 function Layout(){
