@@ -11,7 +11,8 @@ function RecipeListSkeleton() {
             <a className="border rounded-lg bg-gray-200" key={i}>
               <img className="rounded-t-lg w-full aspect-square animate-pulse bg-gray-200"/>
               <div className="">
-                <div className="text-center sm:text-lg text-xs font-bold m-1 animate-pulse bg-gray-200 w-8/10 mx-auto border rounded-2xl h-8"></div>
+                <div className="my-1 mx-auto w-8/10 h-7 border rounded-2xl bg-gray-200 animate-pulse"></div>
+                <div className="my-1 mx-auto w-8/10 h-7 border rounded-2xl bg-gray-200 animate-pulse"></div>
               </div>
             </a>
           );

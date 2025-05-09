@@ -1,6 +1,6 @@
 // NOTE: PLACEHOLDER UNTIL NEW MODAL DESTRUCTURING TESTED
 import RecipeListSkeleton from "./Skeletons/RecipeListSkeleton";
-
+import RecipeFullSkeleton from "./Skeletons/RecipeFullSkeleton";
 const func = () => {
 	return <RecipeListSkeleton />;
 }

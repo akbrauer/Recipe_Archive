@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import RecipeForm from "./ui/RecipeForms/RecipeForm";
-import TempForm from "./Skeletons/TempForm";
+import FormSkeleton from "./Skeletons/FormSkeleton";
 
 function EditRecipe() {
 	const { id } = useParams();
@@ -20,7 +20,7 @@ function EditRecipe() {
 	console.log(recipe);
 
 	if (!recipe) {
-		return <TempForm title="Edit" />;
+		return <FormSkeleton title="Edit" />;
 	}
 
 	async function editRecipe(event: React.FormEvent<HTMLFormElement>) {

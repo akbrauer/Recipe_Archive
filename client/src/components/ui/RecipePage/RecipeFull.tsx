@@ -4,19 +4,23 @@ import { useParams } from "react-router-dom";
 import Button, { LinkButton, SubmitButton } from "../Button"
 import IngredientList from "./IngredientList";
 import Modal from "../Modal";
+import RecipeFullSkeleton from "../../Skeletons/RecipeFullSkeleton";
 
 function RecipeFull () {
     const { id } = useParams();
     const data = useFetch(`/api/recipes/${id}`);
     const recipe = data.recipes?.[0];
     console.log(recipe);
-
     const [isModalOpen, setModalOpen] = useState<boolean>(false);
+    
+    if(!recipe){
+        return <RecipeFullSkeleton />
+    }
     return (
         <div className="m-auto border rounded-lg">
             <img src={recipe?.image} className="w-full rounded-t-lg" alt="recipe image"/>
-            <div className="card-header">
-                <h3 className="border-t border-b text-2xl px-3 py-5">{recipe?.name}</h3>
+            <div className="card-header border-t border-b text-2xl ">
+                <h3 className="px-3 py-5">{recipe?.name}</h3>
             </div>
             <div className="card-body">
                 <div className="card-ingredients border-b p-2">

@@ -2,7 +2,7 @@ import RecipeFull from "./ui/RecipePage/RecipeFull";
 
 function Show(){
     return (
-        <div className=" my-1 xl:mx-30 lg:mx-20 md:mx-5 sm:mx-2">
+        <div className="my-1 xl:mx-30 lg:mx-20 md:mx-5 sm:mx-2">
             <RecipeFull/>
         </div>
     )
