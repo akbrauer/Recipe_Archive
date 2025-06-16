@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Recipe } from "../lib/definitions";
 
+const domain = "https://recipe-archive-theta.vercel.app/";
+//const domain = "http://localhost:5173";
+
 export interface startState {
 	message: string;
 	recipes?: Recipe[];
@@ -17,7 +20,7 @@ export default function useFetch(path: string) {
 	const [data, setData] = useState(initialState);
 	useEffect(() => {
 		console.log("fetch initated");
-		fetch(`http://localhost:5173${path}`)
+		fetch(`${domain}${path}`)
 			.then(res => res.json())
 			.then(data => {
 				setData(data);
