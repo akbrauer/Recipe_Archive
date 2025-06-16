@@ -12,7 +12,7 @@ export interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement>
 
 const Button = ({text, customClass,  ...props }: ButtonProps) => {
     return (
-        <button className={ `border rounded py-1 px-2 ${customClass || 'bg-purple-500'}` } {...props}> { text }</button>
+        <button className={ `cursor-pointer border rounded py-1 px-2 ${customClass || 'bg-purple-500'}` } {...props}> { text }</button>
     )
 }
 
@@ -21,7 +21,7 @@ export default Button;
 export const SubmitButton = ({text, customClass, ...props }: ButtonProps) => {
     props.type = "submit";
     return (
-        <button className={ `border rounded py-1 px-2 ${customClass || "bg-green-500"}` } { ...props }> { text }</button>
+        <button className={ `cursor-pointer border rounded py-1 px-2 ${customClass || "bg-green-500"}` } { ...props }> { text }</button>
     )
 }
 

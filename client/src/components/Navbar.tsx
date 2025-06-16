@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { useState } from "react";
 
 const Navbar = () => {
     const location = useLocation().pathname;
-    console.log(location);
     const [isOpen, setIsOpen] = useState(false);
 
     const boldCurrentPage = (path: string) => {
@@ -22,7 +22,10 @@ const Navbar = () => {
                         <Link to="/"><div className={`py-2 px-3 md:px-5 ${boldCurrentPage('/')}`}>Home</div></Link>
                     </div>
                     <div id="navbar-right" className="flex md:order-2">
-                        <button className={`hover:bg-gray-100 md:hover:bg-transparent ${boldCurrentPage('/login')}`}><Link to="/login"><div className="text-md sm:text-xl px-5">Login</div></Link></button>
+                        <SignedOut><SignInButton><button className="hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 cursor-pointer"><div className="text-md sm:text-xl px-5">Login</div></button></SignInButton></SignedOut>
+                        <SignedIn>
+                            <div className="flex md:mx-2 active:border-0"><UserButton/></div>
+                        </SignedIn>
                         <button id="btn-collapse" className="my-auto mx-2 p-0.5 md:hidden rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" onClick={() => setIsOpen(!isOpen)}>
                             <span className="sr-only">Open main menu</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-7">
