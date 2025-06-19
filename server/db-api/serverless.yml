@@ -18,13 +18,13 @@ provider:
   runtime: nodejs20.x
   environment:
     # Removed quotations from all pg vars
-    PGHOST: ep-blue-union-abefnl10-pooler.eu-west-2.aws.neon.tech
-    PGDATABASE: recipe_archive
-    PGUSER: recipe_archive_owner
-    PGPASSWORD: npg_ng4deQmOAPh8
-    CLOUDINARY_CLOUD_NAME: dviijvxfy
-    CLOUDINARY_KEY: 184525966761295
-    CLOUDINARY_SECRET: OAub7jXA7K_qQ_IIhmiuw7T2RMk
+    PGHOST: ${env:PGHOST}
+    PGDATABASE: ${env:PGDATABASE}
+    PGUSER: ${env:PGUSER}
+    PGPASSWORD: ${env:PGPASSWORD}
+    CLOUDINARY_CLOUD_NAME: ${env:CLOUDINARY_CLOUD_NAME}
+    CLOUDINARY_KEY: ${env:CLOUDINARY_CLOUD_NAME}
+    CLOUDINARY_SECRET: ${env:CLOUDINARY_SECRET}
   httpApi:
     cors: true
 
