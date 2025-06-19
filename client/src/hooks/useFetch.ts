@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Recipe } from "../lib/definitions";
 
-const domain = "https://recipe-archive-theta.vercel.app/";
-//const domain = "http://localhost:5173";
+const domain = "https://5g19rmp620.execute-api.us-east-1.amazonaws.com";
+// const domain = "http://localhost:5173";
 
 export interface startState {
 	message: string;

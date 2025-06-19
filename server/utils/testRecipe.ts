@@ -1,4 +1,4 @@
-import { Recipe } from "./definitions";
+import { Recipe } from "../../server-previous/src/lib/definitions";
 
 const recipe = {
 	id: "678faa83eb0ee52686998935",

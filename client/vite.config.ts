@@ -8,8 +8,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
-        // target: 'https://recipe-archive-theta.vercel.app',
+        // target: 'http://localhost:8080',
+        target: 'https://5g19rmp620.execute-api.us-east-1.amazonaws.com',
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, 'api'),
       }
