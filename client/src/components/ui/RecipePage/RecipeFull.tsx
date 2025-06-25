@@ -6,7 +6,7 @@ import IngredientList from "./IngredientList";
 import Modal from "../Modal";
 import RecipeFullSkeleton from "../../Skeletons/RecipeFullSkeleton";
 
-// import IsOwner from "../Auth/IsOwner";
+import IsOwner from "../Auth/IsOwner";
 
 function RecipeFull() {
 	const { id } = useParams();
@@ -46,12 +46,12 @@ function RecipeFull() {
 				<a href={recipe?.url} className="underline text-blue-600 visited:text-purple-600 text-lg font-medium pl-2 my-auto">
 					Full Recipe
 				</a>
-				{/* <IsOwner ownerId={recipe?.ownerid}> */}
+				<IsOwner ownerId={recipe?.ownerid}>
 					<div className="flex">
 						<LinkButton text="Edit Recipe" href={`/recipes/${recipe?.recipeid}/edit`} customClass="mr-2 bg-yellow-500" />
 						<Button text="Delete Recipe" customClass="bg-red-500" onClick={() => setModalOpen(true)} />
 					</div>
-				{/* </IsOwner> */}
+				</IsOwner>
 			</div>
 
 			<Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} hasCloseBtn={true}>
