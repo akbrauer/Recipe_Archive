@@ -38,14 +38,14 @@ const RecipeForm = ({ submitHandler, endpoint, purpose, errorState, defaultIsFil
 			{errors?.url && <div>{errors?.url[0]?.message}</div>}
 
 			{recipe?.sections ?
-				recipe.sections.map((section, sectionNum) => {
+				recipe.sections.map((_, sectionNum) => {
 					const sectionIngredients = recipe.ingredients.filter((ing) => {
 						if(ing.section === (sectionNum + 1)){
 							return ing;
 						}
 					})
 					return (
-							<input
+						<input
 							className="hidden"
 							id={`section-${sectionNum}-ingNum`}
 							name="numIng"
@@ -53,7 +53,7 @@ const RecipeForm = ({ submitHandler, endpoint, purpose, errorState, defaultIsFil
 							defaultValue={sectionIngredients.length}
 							key={sectionNum}
 						></input>)
-			})
+				})
 			: (recipe && (
 				<input
 				className="hidden"

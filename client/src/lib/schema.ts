@@ -101,7 +101,7 @@ export const validateForm = (formData: FormData) => {
                 key = issue.path[1];
                 cut = 2;
             }
-            const path = issue.path.filter((item, index) => {
+            const path = issue.path.filter((_, index) => {
                 return index >= cut;
             });
             if(customErrors[key]){
