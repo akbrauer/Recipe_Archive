@@ -35,6 +35,7 @@ export const deleteRecipeDB = `DROP TABLE Recipe`;
 
 export const initTables = `CREATE TABLE IF NOT EXISTS Recipe(
     RecipeId uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+    OwnerId varchar(255) NOT NULL,
     Name varchar(255) NOT NULL,
     Image varchar(255) DEFAULT NULL,
     Servings int DEFAULT NULL,

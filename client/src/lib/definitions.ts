@@ -15,6 +15,7 @@ export type Ingredient = {
 
 export type Recipe = {
     recipeid: UUID;
+    ownerid: string;
     name: string;
     image?: string;
     instructions: string[];

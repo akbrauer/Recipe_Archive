@@ -15,6 +15,7 @@ import RecipeList from "./components/ui/AllRecipes/RecipeList";
 import NewRecipe from "./components/NewRecipe";
 import Show from "./components/Show";
 import EditRecipe from "./components/EditRecipe";
+import Login from "./components/Login";
 
 const router = createBrowserRouter([
 	{
@@ -23,8 +24,10 @@ const router = createBrowserRouter([
 			{ path: "/", element: <Home /> },
 			{ path: "/recipes", element: <RecipeList /> },
 			{ path: "/recipes/new", element: <NewRecipe /> },
+			{ path: "/recipes/new/login", element: <Login heading={"Please sign in to add or edit recipes."} redirect="/recipes/new"/> },
 			{ path: "/recipes/:id", element: <Show /> },
 			{ path: "/recipes/:id/edit", element: <EditRecipe /> },
+			{ path: "/login", element: <Login /> },
 		],
 	},
 ]);
@@ -32,7 +35,7 @@ const router = createBrowserRouter([
 const root = createRoot(document.getElementById("root")!);
 root.render(
 	<StrictMode>
-		<ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/recipes">
+		<ClerkProvider publishableKey={PUBLISHABLE_KEY} signUpFallbackRedirectUrl="/recipes" signInFallbackRedirectUrl="/recipes" afterSignOutUrl="/recipes">
 			<RouterProvider router={router} />
 		</ClerkProvider>
 	</StrictMode>
