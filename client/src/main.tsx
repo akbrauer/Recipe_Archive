@@ -19,9 +19,12 @@ import Login from "./components/Login";
 
 const router = createBrowserRouter([
 	{
+		element: <Home />,
+		path: "/"
+	},
+	{
 		element: <Layout />,
 		children: [
-			{ path: "/", element: <Home /> },
 			{ path: "/recipes", element: <RecipeList /> },
 			{ path: "/recipes/new", element: <NewRecipe /> },
 			{ path: "/recipes/new/login", element: <Login heading={"Please sign in to add or edit recipes."} redirect="/recipes/new"/> },
@@ -35,7 +38,7 @@ const router = createBrowserRouter([
 const root = createRoot(document.getElementById("root")!);
 root.render(
 	<StrictMode>
-		<ClerkProvider publishableKey={PUBLISHABLE_KEY} signUpFallbackRedirectUrl="/recipes" signInFallbackRedirectUrl="/recipes" afterSignOutUrl="/recipes">
+		<ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/recipes">
 			<RouterProvider router={router} />
 		</ClerkProvider>
 	</StrictMode>

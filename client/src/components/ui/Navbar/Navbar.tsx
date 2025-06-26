@@ -5,10 +5,11 @@ import { useState } from "react";
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
-		<nav className="bg-amber-400">
+		<nav className="bg-primary text-white">
 			<div className="flex flex-wrap justify-between">
 				{/* items-center max-w-screen-xl */}
 				<NavItem text="Home" linkTo="/" id="navbar-brand" />
+				{/* <div className="text-2xl font-bold bg-gradient-to-r from-white to-accent bg-clip-text text-transparent">Recipe Archive</div> */}
 				<div id="navbar-right" className="flex md:order-2">
 					<ClerkLoginButton />
 					<button
@@ -34,3 +35,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

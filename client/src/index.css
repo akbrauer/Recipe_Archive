@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
-body {
-    background-color:beige ;
+@theme {
+    --color-primary: #3D5F82;
+    /* Perfect for main navigation, primary buttons, and key brand elements */
+    /* Professional and trustworthy while still being distinctive */
+    --color-secondary: #C67E10;
+    /* Excellent for secondary buttons, hover states, and complementary elements */
+    /* Creates nice contrast with the blue-gray primary */
+    --color-accent: #F6C46D;
+    /* Ideal for highlights, badges, notifications, and call-to-action elements */
+    /* Bright enough to draw attention without being overwhelming */
+    --color-background: #E1D3B6;
+    /* Provides a warm, inviting background that's easy on the eyes */
+    /* Much better than pure white for a recipe site's cozy atmosphere */
+    --color-text: #202334;
+    /* Excellent readability against the cream background */
+    /* Professional and easy to read for body text */
+    --color-neutral: #3D5F82;
+    /* Can double as neutral for borders, dividers, and subtle elements */
+    /* Alternatively, you might consider a lighter tint of the cream (`#E1D3B6`) at ~60% opacity */
+    --color-opacity: rgba(0, 0, 0, 0.28);
 }
+
+body {
+    background-color: #E1D3B6;
+}
+
+/* This assignment creates a sophisticated, warm palette perfect for a recipe site - the golden tones evoke warmth and appetite appeal, while the blue-grays provide professional stability and excellent readability. */
